@@ -1,38 +1,65 @@
-.App {
-  text-align: center;
+.sidebar{
+  background-color: #171717;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.chats{
+  /* max-height: 80vh; */
+  scrollbar-color: #37474f  #212121;
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.drawer{
+  scrollbar-color: #37474f  #212121;
+
+}
+html, body, #root {
+  height: 100vh;
+  max-height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.lineFirst{
+  transform: translateY(0.15rem) rotate(0deg) translateZ(0px);
+}
+.lines:hover .lineFirst{
+  transform: translateY(0.15rem) rotate(15deg) translateZ(0px);
+}
+.lineSecond{
+  transform: translateY(-0.15rem) rotate(0deg) translateZ(0px);
+}
+
+.lines:hover .lineSecond{
+  transform: translateY(-0.15rem) rotate(-15deg) translateZ(0px);
+}
+
+.lineFirst2{
+  transform: translateY(0.15rem) rotate(-15deg) translateZ(0px);
+}
+.lineSecond2{
+  transform: translateY(-0.15rem) rotate(15deg) translateZ(0px);
+}
+.historyButton{
+  display: none;
+}
+
+.history:hover .historyButton{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.cursor {
+  display: inline-block;
+  width: 1ch;
+  animation: flicker 0.5s infinite;
+  margin-bottom: 4px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes flicker {
+  0% {
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

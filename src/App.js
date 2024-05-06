@@ -1,24 +1,46 @@
-import logo from './logo.svg';
 import './App.css';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
+import React, { useEffect } from 'react';
+import Main from './routes/main';
+import Login from './routes/login';
+import { retriveToken } from './state/functions';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  useEffect(()=>{
+    retriveToken()
+  },[])
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <Main/>
+      ),
+    },
+    {
+      path: "/c/:chatId",
+      element: (
+        <Main/>
+      ),
+    },
+    {
+      path: "/join",
+      element: (
+        <Login/>
+      ),
+    },
+  ]);
+  return (<>
+    <RouterProvider router={router} />
+    <ToastContainer />
+
+    </>
   );
 }
 
