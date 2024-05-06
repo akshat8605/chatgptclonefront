@@ -11,7 +11,7 @@ export default function Card({ data, setIsOpenM }) {
 
   const gotoChat = () => {
     navigate(`/c/${data['_id']}`)
-    setIsOpenM(false)
+    if(setIsOpenM)   setIsOpenM(false)
   }
   const onshare =()=>{
     toast("Link copied to clipboard you can share now!",{
