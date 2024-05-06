@@ -5,12 +5,13 @@ import { toast } from "react-toastify";
 import { getToken } from "../state/functions";
 import { base_api } from "../constant/url";
 
-export default function Card({ data }) {
+export default function Card({ data, setIsOpenM }) {
   const navigate = useNavigate()
   let { chatId } = useParams();
 
   const gotoChat = () => {
     navigate(`/c/${data['_id']}`)
+    setIsOpenM(false)
   }
   const onshare =()=>{
     toast("Link copied to clipboard you can share now!",{

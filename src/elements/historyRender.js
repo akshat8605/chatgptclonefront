@@ -2,7 +2,7 @@ import React from 'react'
 import Card from './historyCard'
 
 
-const HistoryRender = ({allChats}) => {
+const HistoryRender = ({allChats, setIsOpenM}) => {
     let date;
     let show;
     // console.log(allChats)
@@ -15,7 +15,7 @@ const HistoryRender = ({allChats}) => {
             }
             return(<>
             {show?  <Card data={{date:true, value:date}}/>:null}
-                 <Card data={item} />
+                 <Card data={item} setIsOpenM={setIsOpenM}/>
                  </> )
         }
         )

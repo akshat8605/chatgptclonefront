@@ -136,7 +136,7 @@ const Input = ({ setData, chatData, chats, setIsTyping, getAllChats, shared }) =
        {!shared? <div className="relative my-2 rounded-xl	 shadow-sm max-w-3xl mx-auto focus:border-gray-200 ring-0 focus:ring-0  pt-2 md:pt-0 dark:border-white/20 md:border-transparent md:dark:border-transparent md:w-[calc(100%-.5rem)] juice:w-full">
 
             <input type="text" autoComplete="off"  onKeyDown={(e) => checkEnter(e) } name="messagGPT" value={value} onChange={(e) => setValue(e.target.value)} id="messageGPT" className="block w-full 	focus:ring-0 rounded-xl	 bg-transparent	 border-1 py-4 pl-7 pr-20 text-white placeholder:text-gray-400 border border-gray-600 focus:border-gray-200 sm:text-sm sm:leading-6" placeholder="Message ChatGPT" />
-            <div className={`absolute inset-y-0 rounded-xl	 mr-2 my-2  right-0 flex items-center   ${value == "" ? "bg-gray-600" : "bg-white"}`}>
+            <div className={`absolute inset-y-0 rounded-xl	 mr-2 my-3  right-0 flex items-center   ${value == "" ? "bg-gray-600" : "bg-white"}`}>
                 <button onClick={() => onChatSubmit()} disabled={value===""} className={` border-0 ${value == "" ? "bg-gray-600" : "bg-white "} rounded-xl	 py-0 pl-2 pr-2 text-gray-500  sm:text-sm `}>
                     {!loading ? <img src={Send} alt='send button' /> : <img className='rounded' src={Stop} alt='send button' />}
                 </button>

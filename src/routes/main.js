@@ -144,7 +144,7 @@ function Main() {
         <HistoryRender allChats={allChats} />
       </Drawer>
       <DrawerMobile open={isOpenM} setOpen={setIsOpenM} auth={auth}>
-      <HistoryRender allChats={allChats} />
+      <HistoryRender allChats={allChats} setIsOpenM={setIsOpenM}/>
       
       </DrawerMobile>
       <div>
@@ -154,7 +154,7 @@ function Main() {
                     </button>:null}
                 </div>
       <div className='w-full h-full flex flex-col overflow-y-auto  transition ease-in-out duration-500 '>
-      <Navbar setIsOpen={setIsOpenM}/>
+      <Navbar setIsOpen={setIsOpenM} auth={auth}/>
         <Chats data={data} isTyping={isTyping} setIsTyping={setIsTyping}/>
         <Input setData={setData } chats={data} chatData={chatData} shared={shared} setIsTyping={setIsTyping} getAllChats={getAllChats}/>
       </div>
