@@ -4,16 +4,23 @@ import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword,
 import { auth, gitProvider, provider } from '../util/firebase';
 import { base_api } from '../constant/url';
 import { setAuth, storeToken } from '../state/functions';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const LoginLayout =()=>{
+const LoginLayout = () => {
     const [load, setLoading] = useState(false)
     const navigate = useNavigate();
+    let location = useLocation();
 
+    console.log(location.state)
 
-    const handleClose=()=>{
-    navigate(`/`);
-        
+    const handleClose = () => {
+        if (location.state && location.state['chatId']) {
+
+            navigate(`/c/${location.state['chatId']}`);
+        } else {
+            navigate(`/`);
+        }
+
     }
     const signinwithgoogle = () => {
         setLoading(true)
@@ -28,30 +35,30 @@ const LoginLayout =()=>{
             // ...
         }).catch(alert);
     }
-    const signInWithGithub=()=>{
+    const signInWithGithub = () => {
         signInWithPopup(auth, gitProvider)
-        .then((result) => {
-          // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-          const credential = GithubAuthProvider.credentialFromResult(result);
-          const token = credential.accessToken;
-      
-          // The signed-in user info.
-          const user = result.user;
-          register(user.email, user.displayName)
+            .then((result) => {
+                // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+                const credential = GithubAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
 
-          // IdP data available using getAdditionalUserInfo(result)
-          // ...
-        }).catch((error) => {
-          // Handle Errors here.
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // The email of the user's account used.
-          const email = error.customData.email;
-          // The AuthCredential type that was used.
-          const credential = GithubAuthProvider.credentialFromError(error);
-          console.log(errorMessage)
-          // ...
-        });
+                // The signed-in user info.
+                const user = result.user;
+                register(user.email, user.displayName)
+
+                // IdP data available using getAdditionalUserInfo(result)
+                // ...
+            }).catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.customData.email;
+                // The AuthCredential type that was used.
+                const credential = GithubAuthProvider.credentialFromError(error);
+                console.log(errorMessage)
+                // ...
+            });
     }
 
     const register = (emaild, named) => {
@@ -66,13 +73,13 @@ const LoginLayout =()=>{
             .then(async data => {
                 handleClose(false)
                 setLoading(false)
-                if(data&&data.user){
-                setAuth(data.user)
-            }
-            if(data&&data.user&&data.user.token){
-                storeToken(data.user.token)
-            }
-                
+                if (data && data.user) {
+                    setAuth(data.user)
+                }
+                if (data && data.user && data.user.token) {
+                    storeToken(data.user.token)
+                }
+
             })
             .catch(err => {
                 setLoading(false)
@@ -81,9 +88,9 @@ const LoginLayout =()=>{
     }
 
     return (
-        <Login signinwithgoogle={signinwithgoogle} signInWithGithub={signInWithGithub}/>
+        <Login signinwithgoogle={signinwithgoogle} signInWithGithub={signInWithGithub} />
     )
-    
+
 }
 
 export default LoginLayout;

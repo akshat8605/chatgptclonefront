@@ -142,7 +142,8 @@ const Input = ({ setData, chatData, chats, setIsTyping, getAllChats, shared }) =
                 </button>
             </div>
         </div>:<div className='flex justify-center'>
-                                    <button onClick={()=>onFork()} className="text-white bg-[rgba(16,163,127)] px-4  mx-auto my-3 rounded py-2 pointer hover:bg-[rgba(16,163,127,0.3)]">Fork Chat</button>
+                                    {auth?<button onClick={()=>onFork()} className="text-white bg-[rgba(16,163,127)] px-4  mx-auto my-3 rounded py-2 pointer hover:bg-[rgba(16,163,127,0.3)]">Fork Chat</button>:
+                                    <button onClick={()=>navigate(`/join`, {state:{chatId}})} className="text-white bg-[rgba(16,163,127)] px-4  mx-auto my-3 rounded py-2 pointer hover:bg-[rgba(16,163,127,0.3)]">Sign up to chat</button>}
                               </div>  }
         <p className='text-gray-300  text-center' style={{ fontSize: 10 }}>  ChatGPT can make mistakes. Consider checking important information. Read our <a className='underline' href='#'>Terms</a> and <a className='underline' href='#'> Privacy Policy</a>.</p>
     </div>

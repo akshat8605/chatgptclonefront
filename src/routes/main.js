@@ -13,6 +13,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getToken, setLoading } from '../state/functions';
 import { base_api } from '../constant/url';
 import HistoryRender from '../elements/historyRender';
+// import SharePopup from '../elements/sharePopup';
 var chatData = {};
 
 
@@ -26,19 +27,20 @@ function Main() {
   const [data, setData] =useState({})
   const [allChats, setAllChats] =useState([])
   const [shared, setShared] =useState(false)
+  const [show, setShow] =useState(false)
   let { chatId } = useParams();
   const navigate = useNavigate();
   const getChat=(chatId)=>{
     // console.log(chatId)
     setShared(false)
     const token = getToken()
-    if(!token){
-      navigate(`/`)
-      toast.error("You are not authorised to view the chat", {
-        position: "top-center"
-      });
-      return
-    }
+    // if(!token){
+    //   navigate(`/`)
+    //   toast.error("You are not authorised to view the chat", {
+    //     position: "top-center"
+    //   });
+    //   return
+    // }
     let body = {
       chatId,
       token:token
@@ -141,10 +143,10 @@ function Main() {
   return (
     <div className="	flex-initial h-full flex  w-full scroll-p-0	">
       <Drawer open={isOpen} setOpen={setIsOpen} auth={auth} >
-        <HistoryRender allChats={allChats} />
+        <HistoryRender allChats={allChats} setShow={setShow}/>
       </Drawer>
       <DrawerMobile open={isOpenM} setOpen={setIsOpenM} auth={auth}>
-      <HistoryRender allChats={allChats} setIsOpenM={setIsOpenM}/>
+      <HistoryRender allChats={allChats} setIsOpenM={setIsOpenM} setShow={setShow}/>
       
       </DrawerMobile>
       <div>
@@ -158,6 +160,7 @@ function Main() {
         <Chats data={data} isTyping={isTyping} setIsTyping={setIsTyping}/>
         <Input setData={setData } chats={data} chatData={chatData} shared={shared} setIsTyping={setIsTyping} getAllChats={getAllChats}/>
       </div>
+     {/* <SharePopup show={show} setShow={setShow}/> */}
     </div>
   );
 }
